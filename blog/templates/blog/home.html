@@ -3,7 +3,13 @@
 {% block content %}
     <h1>No longer then</h1>
     {% for post in posts %}
-        <h2>{{ post.title }}</h2>
-        <p>{{ post.content }}</p>
-    {%  endfor %}
+
+        <article class="media content-section">
+            <div class="media-body">
+                <h2><a class="article-title" href="#">{{ post.title }}</a></h2>
+                <p class="article-content">{{ post.content }}</p>
+            </div>
+        </article>
+
+    {% endfor %}
 {% endblock %}
