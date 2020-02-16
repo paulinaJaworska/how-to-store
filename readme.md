@@ -8,12 +8,12 @@ with their observations.
 Additionally, registered users can store on their accounts they own food with 
 the starting date, and will receive notifications when the food is close to expiry.
 
-##Installation
+## Installation
 Python and Django need to be installed
 
 `pip install django` 
 
-##Usage
+## Usage
 Go to the folder  with manage.py and run
 
 `python manage.py runserver`
