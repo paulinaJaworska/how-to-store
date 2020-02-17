@@ -44,6 +44,16 @@
 <main role="main" class="container">
     <div class="row">
         <div class="col-md-8">
+            <!-- Message popup -->
+            {% if messages %}
+                <p>Im here</p>
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+            <!-- page content -->
             {% block content %}{% endblock %}
         </div>
         <div class="col-md-4">
