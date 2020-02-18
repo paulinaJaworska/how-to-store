@@ -256,3 +256,5 @@ fabric.properties
 # Pyre type checker
 
 # End of https://www.gitignore.io/api/django,python,pycharm
+
+profile_pics/
