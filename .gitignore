@@ -258,3 +258,4 @@ fabric.properties
 # End of https://www.gitignore.io/api/django,python,pycharm
 
 profile_pics/
+media
