@@ -2,7 +2,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import (ListView,
                                   DetailView,
                                   CreateView,
-                                  UpdateView)
+                                  UpdateView,
+                                  DeleteView)
 
 from .models import Post
 
@@ -12,6 +13,7 @@ class PostListView(ListView):
     template_name = 'blog/home.html'
     context_object_name = 'posts'
     ordering = ['-date_posted']
+    paginate_by = 2
 
 
 class PostDetailView(DetailView):
@@ -23,6 +25,11 @@ class PostCreateView(LoginRequiredMixin, CreateView):
     fields = ['title', 'content', 'image']
 
 
-class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+class PostUpdateView(LoginRequiredMixin, UpdateView):
     model = Post
     fields = ['title', 'content', 'image']
+
+
+class PostDeleteView(LoginRequiredMixin, DeleteView):
+    model = Post
+    success_url = '/'
