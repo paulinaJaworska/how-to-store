@@ -29,3 +29,10 @@ Then go to the browser and enter the url http://127.0.0.1:8000/
 - user profile with picture
 - pagination
 - password account reset through e-mail
+
+## Future plans
+
+- adding comments to posts
+- user page with saved items
+- introduction of React Native
+- Heroku deployment
