@@ -259,3 +259,6 @@ fabric.properties
 
 profile_pics/
 media
+
+
+.env
