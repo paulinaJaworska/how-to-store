@@ -22,8 +22,10 @@ class Post(models.Model):
 
     @property
     def comments(self):
-        instance = self
-        return Comment.objects.filter_by_instance(instance)
+        """
+        It helps to display only comments that are not replies.
+        """
+        return Comment.objects.filter(reply_to__isnull=True, post=self)
 
 
 class Comment(models.Model):
@@ -31,8 +33,7 @@ class Comment(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     content = models.TextField()
     date_posted = models.DateTimeField(default=timezone.now)
-    reply = models.ForeignKey('self', null=True, related_name='replies', on_delete=models.CASCADE)
+    reply_to = models.ForeignKey('self', null=True, related_name='replies', on_delete=models.CASCADE, blank=True)
 
     def __str__(self):
-        return f'User {self.author.username} commented {self.content}'
-
+        return self.content
