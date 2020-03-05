@@ -5,7 +5,7 @@ from django.views.generic import (ListView,
                                   UpdateView,
                                   DeleteView)
 
-from .models import Post
+from .models import Post, Comment
 
 
 class PostListView(ListView):
@@ -33,3 +33,14 @@ class PostUpdateView(LoginRequiredMixin, UpdateView):
 class PostDeleteView(LoginRequiredMixin, DeleteView):
     model = Post
     success_url = '/'
+
+
+class CommentCreateView(LoginRequiredMixin, CreateView):
+    model = Comment
+    fields = ['content']
+    success_url = '/'
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        form.instance.post = Post.objects.get(pk=self.kwargs['pk'])
+        return super().form_valid(form)
