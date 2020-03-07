@@ -1,4 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.shortcuts import redirect
+from django.urls import reverse
 from django.views.generic import (ListView,
                                   DetailView,
                                   CreateView,
@@ -9,6 +11,9 @@ from .models import Post, Comment
 
 
 class PostListView(ListView):
+    """
+        Displays maximum 5 posts with our items. Pass them to template in a reversed order.
+    """
     model = Post
     template_name = 'blog/home.html'
     context_object_name = 'posts'
@@ -17,30 +22,42 @@ class PostListView(ListView):
 
 
 class PostDetailView(DetailView):
+    """ Displays page with post's details. """
     model = Post
 
 
 class PostCreateView(LoginRequiredMixin, CreateView):
+    """ Form creating a new post. Requires to be logged in. Redirects to detail view."""
     model = Post
     fields = ['title', 'season', 'ripeness', 'storage', 'image']
 
 
 class PostUpdateView(LoginRequiredMixin, UpdateView):
+    """ Form updating a new post. Requires to be logged in. Redirects to detail view. """
     model = Post
-    fields = ['title', 'content', 'image']
+    fields = ['title', 'season', 'ripeness', 'storage', 'image']
 
 
 class PostDeleteView(LoginRequiredMixin, DeleteView):
+    """ Delete post, directs to home page. Requires to be logged in. """
     model = Post
     success_url = '/'
 
 
 class CommentCreateView(LoginRequiredMixin, CreateView):
+    """
+    Adds new comment. Automatically adds logged in user and post id before saving it. Redirects to detail view.
+    """
     model = Comment
     fields = ['content']
-    success_url = '/'
+
+    def get_success_url(self):
+        """ Redirects to post detail page after the form is submitted"""
+        post = self.object.post.pk
+        return reverse('post-detail', kwargs={'pk': post})
 
     def form_valid(self, form):
         form.instance.author = self.request.user
         form.instance.post = Post.objects.get(pk=self.kwargs['pk'])
         return super().form_valid(form)
+
