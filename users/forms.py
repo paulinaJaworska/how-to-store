@@ -13,6 +13,7 @@ class UserRegisterForm(UserCreationForm):
 
 
 class UserUpdateForm(forms.ModelForm):
+    """ Form to reset password through email. """
     email = forms.EmailField()
 
     class Meta:

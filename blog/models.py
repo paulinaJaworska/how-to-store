@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 
 
 class Post(models.Model):
+    """ Stores details about how to store fruits and vegetables. """
     title = models.CharField(max_length=100)
     season = models.TextField(blank=True)
     ripeness = models.TextField(blank=True)
@@ -22,13 +23,12 @@ class Post(models.Model):
 
     @property
     def comments(self):
-        """
-        It helps to display only comments that are not replies.
-        """
+        """ It helps to display only comments that are not replies. """
         return Comment.objects.filter(reply_to__isnull=True, post=self)
 
 
 class Comment(models.Model):
+    """ Users comments amd answers to comments(self reference) under each post. """
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     content = models.TextField()
