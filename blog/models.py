@@ -29,8 +29,8 @@ class Comment(models.Model):
     content = models.TextField()
     date_posted = models.DateTimeField(default=timezone.now)
     reply_to = models.ForeignKey('self', null=True, related_name='replies', on_delete=models.CASCADE, blank=True)
-    # comments has to be activated manually by admin todo change to False before populating with new data and deplyment
-    active = models.BooleanField(default=True)
+    # comments has to be activated manually by admin
+    active = models.BooleanField(default=False)
 
     def __str__(self):
         return self.content
