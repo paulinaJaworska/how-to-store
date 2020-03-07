@@ -21,19 +21,16 @@ class Post(models.Model):
     def get_absolute_url(self):
         return reverse('post-detail', kwargs={'pk': self.pk})
 
-    @property
-    def comments(self):
-        """ It helps to display only comments that are not replies. """
-        return Comment.objects.filter(reply_to__isnull=True, post=self)
-
 
 class Comment(models.Model):
     """ Users comments amd answers to comments(self reference) under each post. """
-    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     content = models.TextField()
     date_posted = models.DateTimeField(default=timezone.now)
     reply_to = models.ForeignKey('self', null=True, related_name='replies', on_delete=models.CASCADE, blank=True)
+    # comments has to be activated manually by admin todo change to False before populating with new data and deplyment
+    active = models.BooleanField(default=True)
 
     def __str__(self):
         return self.content

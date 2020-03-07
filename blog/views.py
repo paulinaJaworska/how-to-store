@@ -61,10 +61,42 @@ class CommentCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
+class CommentUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    """ Form updating a comment. Requires to be logged in. Redirects to detail view. """
+    model = Comment
+    fields = ['content']
+
+    def test_func(self):
+        comment = self.get_object()
+        if self.request.user == comment.author:
+            return True
+        return False
+
+    def get_success_url(self):
+        """ Redirects to post detail page after the form is submitted"""
+        post = self.object.post.pk
+        return reverse('post-detail', kwargs={'pk': post})
+
+
+class CommentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    """ Deletes a comment. """
+    model = Comment
+
+    def test_func(self):
+        comment = self.get_object()
+        if self.request.user == comment.author:
+            return True
+        return False
+
+    def get_success_url(self):
+        post = self.object.post.pk
+        return reverse('post-detail', kwargs={'pk': post})
+
+
+
 class CommentAnswerCreateView(LoginRequiredMixin, CreateView):
     """ Adds answer to the comment under a post."""
     model = Comment
-    fields = ['content']
 
     def get_success_url(self):
         """ Redirects to post detail page after the form is submitted"""

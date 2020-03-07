@@ -5,10 +5,6 @@
     <article class="media content-section">
         <img class="rounded-circle article-img" src="{{ object.image.url }}">
         <div class="media-body">
-            <div class="article-metadata">
-                <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'post-update' object.id %}">Update</a>
-                <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'post-delete' object.id %}">Delete</a>
-            </div>
             <div>
                 <div class="article-content">
                     <h2 class="article-title">{{ object.title }}</h2>
@@ -30,11 +26,20 @@
     </article>
     <h2>Comments:</h2>
     <div class="article content-section">
-        {% for comment in object.comments.all%}
+        {% for comment in object.comments.all %}
             <img class="rounded-circle article-img" src="{{ comment.author.profile.image.url }}">
             <small>{{ comment.author.username }}</small>
             <small>{{ comment.date_posted }}</small>
-            <a type="button" href="{% url 'answer-create' post.id comment.id %}">Add answer</a>
+            <div class="article-metadata">
+                <a type="button" class="btn btn-info btn-sm mt-1 mb-1"
+                   href="{% url 'answer-create' comment.pk %}">Add answer</a>
+                {% if comment.author == user %}
+                    <a type="button" class="btn btn-secondary btn-sm mt-1 mb-1"
+                       href="{% url 'comment-update' comment.pk %}">Update comment</a>
+                    <a class="btn btn-warning btn-sm mt-1 mb-1" href="{% url 'comment-delete' comment.pk %}"
+                       type="button">Delete comment</a>
+                {% endif %}
+            </div>
             <div class="media-body comments mb-3">
                 <div>{{ comment }}</div>
                 <div class="ml-5 mb-3 mt-3">
@@ -42,7 +47,16 @@
                         <img class="rounded-circle article-img" src="{{ comment.author.profile.image.url }}">
                         <small>{{ comment.author.username }}</small>
                         <small>{{ comment.date_posted }}</small>
-                        <a type="button" href="{% url 'answer-create' post.id comment.id %}">Add answer</a>
+                        <div class="article-metadata">
+                            <a type="button" class="btn btn-secondary btn-sm mt-1 mb-1"
+                               href="{% url 'answer-create' comment.pk %}">Add answer</a>
+                            {% if comment.author == user %}
+                                <a type="button" class="btn btn-secondary btn-sm mt-1 mb-1"
+                                   href="{% url 'comment-update' comment.pk %}">Update comment</a>
+                                <a type="button" class="btn btn-warning btn-sm mt-1 mb-1"
+                                   href="{% url 'comment-delete' comment.pk %}">Delete comment</a>
+                            {% endif %}
+                        </div>
                         <div>{{ reply }}</div>
                     {% endfor %}
                 </div>
