@@ -31,7 +31,7 @@
     <h2>Comments:</h2>
     <div class="article content-section">
         {% for comment in object.comments.all%}
-            <img class="rounded-circle article-img" src="{{ comment.author.profile.image }}">
+            <img class="rounded-circle article-img" src="{{ comment.author.profile.image.url }}">
             <small>{{ comment.author.username }}</small>
             <small>{{ comment.date_posted }}</small>
             <a type="button" href="{% url 'answer-create' post.id comment.id %}">Add answer</a>
@@ -39,7 +39,7 @@
                 <div>{{ comment }}</div>
                 <div class="ml-5 mb-3 mt-3">
                     {% for reply in comment.replies.all %}
-                        <img class="rounded-circle article-img" src="{{ comment.author.profile.image }}">
+                        <img class="rounded-circle article-img" src="{{ comment.author.profile.image.url }}">
                         <small>{{ comment.author.username }}</small>
                         <small>{{ comment.date_posted }}</small>
                         <a type="button" href="{% url 'answer-create' post.id comment.id %}">Add answer</a>

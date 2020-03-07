@@ -13,7 +13,7 @@ class Post(models.Model):
     freezer = models.BooleanField(blank=True, default=False)
     date_posted = models.DateTimeField(default=timezone.now)
     date_modified = models.DateTimeField(auto_now=True)
-    image = models.ImageField(default='default.jpg', upload_to='profile_pics')
+    image = models.ImageField(default='post_default.jpg', upload_to='post_pics')
 
     def __str__(self):
         return self.title
