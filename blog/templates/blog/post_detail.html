@@ -9,16 +9,32 @@
                 <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'post-update' object.id %}">Update</a>
                 <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'post-delete' object.id %}">Delete</a>
             </div>
-            <h2 class="article-title">{{ object.title }}</h2>
-            <p class="article-content">{{ object.content }}</p>
+            <div>
+                <div class="article-content">
+                    <h2 class="article-title">{{ object.title }}</h2>
+                    {% if post.season %}
+                        <h3>Season:</h3>
+                        <p class="article-content">{{ post.season }}</p>
+                    {% endif %}
+                    {% if post.ripeness %}
+                        <h3>Ripeness:</h3>
+                        <p class="article-content">{{ post.ripeness }}</p>
+                    {% endif %}
+                    {% if post.storage %}
+                        <h3>Storage:</h3>
+                        <p class="article-content">{{ post.storage }}</p>
+                    {% endif %}
+                </div>
+            </div>
         </div>
     </article>
     <h2>Comments:</h2>
     <div class="article content-section">
-        {% for comment in object.comments.all %}
+        {% for comment in object.comments.all%}
             <img class="rounded-circle article-img" src="{{ comment.author.profile.image }}">
             <small>{{ comment.author.username }}</small>
             <small>{{ comment.date_posted }}</small>
+            <a type="button" href="{% url 'answer-create' post.id comment.id %}">Add answer</a>
             <div class="media-body comments mb-3">
                 <div>{{ comment }}</div>
                 <div class="ml-5 mb-3 mt-3">
@@ -26,10 +42,10 @@
                         <img class="rounded-circle article-img" src="{{ comment.author.profile.image }}">
                         <small>{{ comment.author.username }}</small>
                         <small>{{ comment.date_posted }}</small>
+                        <a type="button" href="{% url 'answer-create' post.id comment.id %}">Add answer</a>
                         <div>{{ reply }}</div>
                     {% endfor %}
                 </div>
-
             </div>
         {% endfor %}
         <div>

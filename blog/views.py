@@ -61,3 +61,20 @@ class CommentCreateView(LoginRequiredMixin, CreateView):
         form.instance.post = Post.objects.get(pk=self.kwargs['pk'])
         return super().form_valid(form)
 
+
+class CommentAnswerCreateView(LoginRequiredMixin, CreateView):
+    """ Adds answer to the comment under a post."""
+    model = Comment
+    fields = ['content']
+
+    def get_success_url(self):
+        """ Redirects to post detail page after the form is submitted"""
+        post = self.object.post.pk
+        return reverse('post-detail', kwargs={'pk': post})
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        form.instance.post = Post.objects.get(pk=self.kwargs['pk'])
+        # comment to which this answer is a reply
+        form.instance.reply_to = Comment.objects.get(pk=self.kwargs['comment'])
+        return super().form_valid(form)

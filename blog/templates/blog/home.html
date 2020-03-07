@@ -6,20 +6,6 @@
             <img class="rounded-circle article-img" src="{{ post.image.url }}">
             <div class="media-body">
                 <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
-                <div>
-                    {% if post.season %}
-                    <h3>Season:</h3>
-                    <p class="article-content">{{ post.season }}</p>
-                    {% endif %}
-                    {% if post.ripeness %}
-                    <h3>Ripeness:</h3>
-                    <p class="article-content">{{ post.ripeness }}</p>
-                    {% endif %}
-                    {% if post.storage %}
-                    <h3>Storage:</h3>
-                    <p class="article-content">{{ post.storage }}</p>
-                    {% endif %}
-                </div>
             </div>
         </article>
     {% endfor %}
