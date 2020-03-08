@@ -1,4 +1,5 @@
 from django.urls import path
+from rest_framework import routers
 
 from .views import (PostListView,
                     PostDetailView,
@@ -7,6 +8,13 @@ from .views import (PostListView,
                     CommentUpdateView,
                     CommentDeleteView
                     )
+from .api import PostViewSet, CommentViewSet
+
+
+router = routers.DefaultRouter()
+# params: URL prefix, viewset, basename
+router.register('api/posts', PostViewSet, 'posts-list')
+router.register('api/comments', CommentViewSet, 'comments-list')
 
 urlpatterns = [
     path('', PostListView.as_view(), name='blog-home'),
@@ -17,3 +25,6 @@ urlpatterns = [
     path('comment/<int:pk>/delete/', CommentDeleteView.as_view(), name='comment-delete'),
     path('comment/<int:pk>/answer/new/', CommentAnswerCreateView.as_view(), name='answer-create'),
 ]
+
+# routers has to be added to urls this way. Otherwise there is an error.
+urlpatterns += router.urls
