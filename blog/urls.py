@@ -26,5 +26,5 @@ urlpatterns = [
     path('comment/<int:pk>/answer/new/', CommentAnswerCreateView.as_view(), name='answer-create'),
 ]
 
-# routers has to be added to urls this way. Otherwise there is an error.
+# routers has to be added to urls this way to existing path's list. Otherwise there is an error.
 urlpatterns += router.urls
