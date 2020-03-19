@@ -263,3 +263,4 @@ media
 
 .env
 htmlcov
+frontend/node_modules
