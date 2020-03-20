@@ -1,0 +1,14 @@
+:root {
+  --main-bg-color: #f3ff93;
+    --navbar-bg-color: #5a3921;
+/*browns to test  44000d   560d0d  */
+/*bg colors to test  ffffb5  f1d6ab*/
+}
+
+.navbar {
+    background-color: var(--navbar-bg-color);
+}
+
+body {
+    background-color: #5f788a;
+}
