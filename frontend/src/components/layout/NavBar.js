@@ -10,10 +10,10 @@ export default class Header extends Component {
                     <div className="container-fluid">
                     <div className="row w-100">
                     <ul className="navbar-nav mr-auto col-2">
-                        <li className="nav-item active">
+                        <li className="nav-item active my-2">
                             <a className="nav-link" href="#">Home<span className="sr-only">(current)</span></a>
                         </li>
-                        <li className="nav-item active">
+                        <li className="nav-item active my-2">
                             <a className="nav-link" href="#">About<span className="sr-only">(current)</span></a>
                         </li>
                     </ul>
@@ -21,15 +21,13 @@ export default class Header extends Component {
                         <li className="nav-item active">
                             <h3 className="nav-link">How to store<span className="sr-only">(current)</span></h3>
                         </li>
-
                     <form className="form-inline my-2 my-lg-0">
                         <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"/>
                         <button className="btn btn-light my-2 my-sm-0" type="submit">Search</button>
                     </form>
-
                         </ul>
                     <ul className="navbar-nav mr-auto col-2 d-flex justify-content-end">
-                        <li className="nav-item active">
+                        <li className="nav-item active my-2">
                             <a className="nav-link" href="#">Login<span className="sr-only">(current)</span></a>
                         </li>
                     </ul>

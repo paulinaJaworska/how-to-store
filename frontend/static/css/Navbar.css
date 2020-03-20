@@ -8,10 +8,11 @@
 
 }
 
-a,h3{
+a, h3 {
     color: white !important;
 }
 
 a:hover {
-    color: #f3ff93;
+    text-decoration-color: white !important;
+    text-decoration: underline !important;
 }
