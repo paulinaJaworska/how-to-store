@@ -140,3 +140,8 @@ REST_FRAMEWORK = {
         'rest_framework.renderers.JSONRenderer',
     )
 }
+
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+]

@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack --mode development ./src/index.js --output ./static/frontend/main.js",
+    "dev": "webpack --mode development --watch ./src/index.js --output ./static/frontend/main.js",
     "build": "webpack --mode production ./src/index.js --output ./static/frontend/main.js"
   },
   "keywords": [],
@@ -12,10 +12,12 @@
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.8.7",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
     "@babel/preset-env": "^7.8.7",
     "@babel/preset-react": "^7.8.3",
     "babel-loader": "^8.0.6",
     "babel-plugin-class-properties": "^1.0.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
     "prop-types": "^15.7.2",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
@@ -23,6 +25,7 @@
     "webpack-cli": "^3.3.11"
   },
   "dependencies": {
+    "axios": "^0.19.2",
     "css-loader": "^3.4.2",
     "style-loader": "^1.1.3"
   }
