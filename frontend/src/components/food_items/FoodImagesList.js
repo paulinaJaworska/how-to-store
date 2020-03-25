@@ -1,12 +1,13 @@
+import '../../../static/css/FoodImagesList.css'
 import React from 'react';
+import ImageCard from "./ImageCard";
 
 const FoodImagesList = props => {
-    console.log(props.food_items);
     const images = props.food_items.map((item) => {
-        return <img src={item.image}/>
+        return <ImageCard key={item.id} item={item}/>
     });
 
-    return <div>{images}</div>
+    return <div className="image-list">{images}</div>
 };
 
 
