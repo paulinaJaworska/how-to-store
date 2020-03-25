@@ -10,7 +10,7 @@ class App extends Component {
 
 
     getPosts() {
-        axios.get('http://localhost:8000/api/posts')
+        axios.get('http://127.0.0.1:8000/api/posts')
             .then(response => {
                 this.setState({food_items: response.data});
             });

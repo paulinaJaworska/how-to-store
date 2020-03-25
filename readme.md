@@ -1,12 +1,11 @@
-# No longer then
+# How to store foods?
 
-No longer then helps us to not waste food by gathering information 
-about how long fruits and vegetables can be stored. Because there is not much 
-information found about that on the Internet, the community can add comments 
-with their observations.
+'How to store' gathers information, scattered all around the Internet, about how fruits and vegetables should be stored 
+to be fresh longer.
 
-Additionally, registered users can store on their accounts they own food with 
-the starting date, and will receive notifications when the food is close to expiry.
+Application offers functionalities like displaying food items and searching through them.
+Additionally, registered users can store can add comments. Admin panel lets to manage users and accept or decline their 
+comments.
 
 ## Installation
 
@@ -31,8 +30,6 @@ Then go to the browser and enter the url http://127.0.0.1:8000/
 - password account reset through e-mail
 - adding comments to posts
 
-## Future plans
+## Main page
 
-- user page with saved items
-- introduction of React Native
-- eployment
+![Main Page](media/readme/main_page.png)
