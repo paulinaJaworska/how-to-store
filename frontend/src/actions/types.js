@@ -1,0 +1,1 @@
+export const GET_FOOD_ITEMS = "GET_FOOD_ITEMS";
