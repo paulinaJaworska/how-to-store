@@ -9,3 +9,8 @@
     width: 250px;
     grid-row-end: 2 /*cells occupied by and image*/
 }
+
+.image-list img:hover {
+    transition: all .2s ease-in-out;
+    transform: scale(1.1);
+}

@@ -5,6 +5,9 @@ import NavBar from './layout/NavBar'
 import FoodImagesList from './food_items/FoodImagesList'
 import axios from "axios";
 
+import {Provider} from 'react-redux';
+import store from "../store";
+
 class App extends Component {
     state = {food_items: []};  // use [] to avoid potential errors(e.g calling map or length on it)
 
@@ -23,10 +26,12 @@ class App extends Component {
 
     render() {
         return (
-            <div>
-                <NavBar/>
-                <FoodImagesList food_items={this.state.food_items}/>
-            </div>
+            <Provider store={}>
+                <div>
+                    <NavBar/>
+                    <FoodImagesList food_items={this.state.food_items}/>
+                </div>
+            </Provider>
         )
     }
 }
