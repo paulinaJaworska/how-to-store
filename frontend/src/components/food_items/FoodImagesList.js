@@ -20,7 +20,11 @@ export class FoodImagesList extends React.Component {
         const images = this.props.foodItems.map((item) => {
             return <ImageCard key={item.id} item={item}/>
         });
-        return <div className="image-list">{images}</div>
+        return (
+            <>
+                <div className="image-list">{images}</div>
+            </>
+        )
     }
 }
 
@@ -29,5 +33,4 @@ const mapStateToProps = state => ({
     foodItems: state.foodItems.foodItems
 });
 
-// export default FoodImagesList;
 export default connect(mapStateToProps, {getFoodItems})(FoodImagesList);
