@@ -1,5 +1,5 @@
 /*browns to test  44000d   560d0d  */
-/*bg colors to test  ffffb5  f1d6ab #f3ff93*/
+/*bg colors to test  #ffffb5  f1d6ab #f3ff93*/
 
 
 .navbar {
@@ -14,4 +14,57 @@ a, h3 {
 a:hover {
     text-decoration-color: white !important;
     text-decoration: underline !important;
+}
+
+/*AutocompleteSearchBar*/
+
+input {
+    border: 1px solid #999;
+    padding: 0.5rem;
+    width: 300px;
+}
+
+.no-suggestions {
+    color: #999;
+    padding: 0.5rem;
+}
+
+.suggestions {
+    z-index: 1;
+    background-color: white;
+    position: absolute;
+    top: 48px;
+    border: 1px solid #5a3921;
+    border-top-width: 0;
+    list-style: none;
+    margin-top: 0;
+    max-height: 143px;
+    overflow-y: auto;
+    padding-left: 0;
+    width: calc(240px + 1rem);
+    border-radius: .25rem;
+}
+
+.suggestions li {
+    padding: 0.5rem;
+}
+
+.suggestion-active,
+.suggestions li:hover {
+    background-color: #ffffb5;
+    color: #5a3921;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.suggestions li:not(:last-of-type) {
+    border-bottom: 1px solid #5a3921;
+}
+
+.search-form {
+    position: relative;
+}
+
+.form-control {
+    border: 1px solid #5a3921 !important;
 }

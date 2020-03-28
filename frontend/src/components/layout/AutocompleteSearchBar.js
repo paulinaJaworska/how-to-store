@@ -150,7 +150,7 @@ class AutocompleteSearchBar extends Component {
 
         return (
             <Fragment>
-                <form className="form-inline my-2 my-lg-0" onSubmit={onFormSubmit}>
+                <form className="search-form form-inline my-2 my-lg-0" onSubmit={onFormSubmit}>
                     <input
                         className="form-control mr-sm-2"
                         type="text"
@@ -158,8 +158,8 @@ class AutocompleteSearchBar extends Component {
                         onKeyDown={onKeyDown}
                         value={userInput}
                     />
+                    {suggestionsListComponent}
                 </form>
-                {suggestionsListComponent}
             </Fragment>
         );
     }
