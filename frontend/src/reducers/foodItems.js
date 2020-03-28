@@ -1,7 +1,7 @@
 import {GET_FOOD_ITEMS} from '../actions/types.js'
 
 const initialState = {
-    foodItems: []
+    foodItems: [],
 };
 
 export default function (state = initialState, action) {
@@ -9,7 +9,7 @@ export default function (state = initialState, action) {
         case GET_FOOD_ITEMS:
             return {
                 ...state,
-                foodItems: action.payload
+                foodItems: action.payload,
             };
         default:
             return state;

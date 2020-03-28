@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-import SearchBar from "./SearchBar";
+import AutocompleteSearchBar from "./AutocompleteSearchBar";
 import '../../../static/css/Navbar.css';
+
 
 export default class Header extends Component {
     render() {
@@ -26,7 +27,7 @@ export default class Header extends Component {
                                 <li className="nav-item active">
                                     <h3 className="nav-link">How to store<span className="sr-only">(current)</span></h3>
                                 </li>
-                                <SearchBar/>
+                                <AutocompleteSearchBar/>
                             </ul>
                             <ul className="navbar-nav mr-auto col-2 d-flex justify-content-end">
                                 <li className="nav-item active my-2">

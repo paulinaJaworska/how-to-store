@@ -8,7 +8,7 @@ import {getFoodItems} from "../../actions/foodItems";
 
 export class FoodImagesList extends React.Component {
     static propTypes = {
-        foodItems: PropTypes.array.isRequired
+        foodItems: PropTypes.array.isRequired,
     };
 
     componentDidMount() {
@@ -30,7 +30,7 @@ export class FoodImagesList extends React.Component {
 
 
 const mapStateToProps = state => ({
-    foodItems: state.foodItems.foodItems
+    foodItems: state.foodItems.foodItems,
 });
 
 export default connect(mapStateToProps, {getFoodItems})(FoodImagesList);
