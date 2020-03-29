@@ -1,14 +1,19 @@
 import React, {Component, Fragment} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
+import {getSearchResult, getFoodItems} from "../../actions/foodItems";
 
 function mapStateToProps(state) {
-    return {foodItems: state.foodItems.foodItems};
+    return {
+        foodItems: state.foodItems.foodItems,
+        allFoodItems: state.foodItems.allFoodItems
+    };
 }
 
 class AutocompleteSearchBar extends Component {
     static propTypes = {
-        foodItems: PropTypes.instanceOf(Array)
+        foodItems: PropTypes.instanceOf(Array),
+        allFoodItems: PropTypes.instanceOf(Array)
     };
 
     constructor(props) {
@@ -23,23 +28,29 @@ class AutocompleteSearchBar extends Component {
             showSuggestions: false,
             // What the user has entered
             userInput: "",
-            term: ''
+            userInputLength: 0
         };
     }
 
     onFormSubmit = event => {
         //    prevents default page refreshing after hitting enter
         event.preventDefault();
-        // take all the post data from the store
-        // filter records base on titles and search term
+        // get all the search results based on user input
         // dispatch the result to the store to let it be displayed
+        if (this.state.userInputLength === 0) {
+            // user deleted whole input and has hit enter
+            this.setState({userInput: ''});
+            this.props.getFoodItems();
+        } else {
+            this.props.getSearchResult(this.state.userInput);
+        }
+
     };
 
     // Event fired when the input value is changed
     onChange = e => {
-        const suggestions = this.props.foodItems.map(item => item.title);
+        const suggestions = this.props.allFoodItems.map(item => item.title);
         const userInput = e.currentTarget.value;
-
 
         // Filter our suggestions that don't contain the user's input
         const filteredSuggestions = suggestions.filter(
@@ -53,7 +64,8 @@ class AutocompleteSearchBar extends Component {
             activeSuggestion: 0,
             filteredSuggestions,
             showSuggestions: true,
-            userInput: e.currentTarget.value
+            userInput: e.currentTarget.value,
+            userInputLength: userInput.length
         });
     };
 
@@ -165,4 +177,4 @@ class AutocompleteSearchBar extends Component {
     }
 }
 
-export default connect(mapStateToProps,)(AutocompleteSearchBar);
+export default connect(mapStateToProps, {getSearchResult, getFoodItems})(AutocompleteSearchBar);
