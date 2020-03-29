@@ -88,8 +88,12 @@ class AutocompleteSearchBar extends Component {
     onKeyDown = e => {
         const {activeSuggestion, filteredSuggestions} = this.state;
 
-        // User pressed the enter key, update the input and close the
-        // suggestions
+        // Move scrollbar along with an active suggestion
+        const container = document.getElementById('suggestions');
+        const rowToScrollTo = document.getElementById('suggestion-active');
+        container.scrollTop = rowToScrollTo.offsetTop;
+
+        // User pressed the enter key, update the input and close the suggestions
         if (e.keyCode === 13) {
             this.setState({
                 activeSuggestion: 0,
@@ -134,17 +138,20 @@ class AutocompleteSearchBar extends Component {
         if (showSuggestions && userInput) {
             if (filteredSuggestions.length) {
                 suggestionsListComponent = (
-                    <ul className="suggestions">
+                    <ul id="suggestions" className="suggestions">
                         {filteredSuggestions.map((suggestion, index) => {
+                            let id;
                             let className;
 
                             // Flag the active suggestion with a class
                             if (index === activeSuggestion) {
+                                id = "suggestion-active";
                                 className = "suggestion-active";
                             }
 
                             return (
                                 <li
+                                    id={id}
                                     className={className}
                                     key={suggestion}
                                     onClick={onClick}
