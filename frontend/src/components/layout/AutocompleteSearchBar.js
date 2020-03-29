@@ -67,6 +67,7 @@ class AutocompleteSearchBar extends Component {
             userInput: e.currentTarget.value,
             userInputLength: userInput.length
         });
+
     };
 
     // Event fired when the user clicks on a suggestion
@@ -78,6 +79,9 @@ class AutocompleteSearchBar extends Component {
             showSuggestions: false,
             userInput: e.currentTarget.innerText
         });
+        // result of clicking on one of the suggestions on suggestion's list
+        this.props.getSearchResult(e.target.innerText);
+
     };
 
     // Event fired when the user presses a key down

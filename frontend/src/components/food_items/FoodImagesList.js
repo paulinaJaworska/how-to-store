@@ -20,11 +20,16 @@ export class FoodImagesList extends React.Component {
         const images = this.props.foodItems.map((item) => {
             return <ImageCard key={item.id} item={item}/>
         });
+        let message;
+        if (this.props.foodItems.length === 0) {
+            message = <h1 className="not-found">Nothing found!</h1>
+        }
         return (
             <>
+                <div className="message-not-found-container" >{message}</div>
                 <div className="image-list">{images}</div>
-            </>
-        )
+        </>
+                )
     }
 }
 

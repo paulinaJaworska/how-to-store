@@ -14,3 +14,16 @@
     transition: all .2s ease-in-out;
     transform: scale(1.1);
 }
+
+
+.message-not-found-container {
+    width: 100%;
+    display: inline-block;
+}
+
+.not-found {
+    padding-top: 50px;
+    width: 100%;
+    text-align: center;
+    color: #5a3921
+}
