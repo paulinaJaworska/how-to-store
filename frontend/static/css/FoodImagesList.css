@@ -7,7 +7,7 @@
 
 .image-list img {
     width: 250px;
-    grid-row-end: 2 /*cells occupied by and image*/
+    grid-row-end: 2; /*cells occupied by and image*/
 }
 
 .image-list img:hover {
@@ -26,4 +26,8 @@
     width: 100%;
     text-align: center;
     color: #5a3921
+}
+
+.jumbotron {
+    background-color: white !important;
 }
