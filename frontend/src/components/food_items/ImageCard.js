@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
+import {Link} from "react-router-dom";
 
 class ImageCard extends Component {
     constructor(props) {
         super(props);
 
-        this.state = { spans: 0 };
+        this.state = {spans: 0};
 
         this.imageRef = React.createRef();
     }
@@ -24,12 +25,12 @@ class ImageCard extends Component {
 
 
     render() {
-        const {title, image} = this.props.item;
+        const {id, title, image} = this.props.item;
 
         return (
-            <div style={{ gridRowEnd: `span ${this.state.spans}`}}>
+            <Link to={{pathname: `${title}`}} style={{gridRowEnd: `span ${this.state.spans}`}}>
                 <img ref={this.imageRef} alt={title} src={image}/>
-            </div>
+            </Link>
         );
     }
 }

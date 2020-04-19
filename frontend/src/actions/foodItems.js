@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import {GET_FOOD_ITEMS, GET_SEARCH_RESULT} from "./types";
+import {GET_FOOD_ITEM, GET_FOOD_ITEMS, GET_SEARCH_RESULT} from "./types";
 
 // GET FOOD ITEMS
 export const getFoodItems = () => dispatch => {
@@ -24,4 +24,28 @@ export const getSearchResult = (term) => dispatch => {
             });
         })
         .catch(err => console.log(err));
+};
+
+// GET DETAILS OF A FOOD ITEM
+export const getFoodItem = (title) => dispatch => {
+    axios.get(`/api/posts/?title=${title}`)
+        .then(res => {
+            dispatch({
+                type: GET_FOOD_ITEM,
+                payload: res.data
+            })
+        })
+        .catch(err => console.log(err));
+    // return (dispatch, getState) => {
+    //     const allItems = getState().foodItems.allFoodItems;
+    //     let currentItemDetails;
+    //     let item;
+    //     for (item = 0; item < allItems.length; item++) {
+    //         if (allItems[item]['title'] === title);
+    //         currentItemDetails = allItems[item];
+    //         break;
+    //     }
+
+
+    // };
 };

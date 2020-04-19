@@ -10,11 +10,10 @@ from .views import (PostListView,
                     )
 from .api import PostViewSet, CommentViewSet
 
-
 router = routers.DefaultRouter()
 # params: URL prefix, viewset, basename
-router.register('api/posts', PostViewSet, 'posts-list')
-router.register('api/comments', CommentViewSet, 'comments-list')
+router.register('posts', PostViewSet, 'posts-list')
+router.register('comments', CommentViewSet, 'comments-list')
 
 urlpatterns = [
     path('', PostListView.as_view(), name='blog-home'),

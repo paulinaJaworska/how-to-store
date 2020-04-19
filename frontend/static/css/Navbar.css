@@ -1,10 +1,15 @@
 /*browns to test  44000d   560d0d  */
 /*bg colors to test  #ffffb5  #f1d6ab #f3ff93*/
 
-
 .navbar {
     background-color: #5a3921;
     font-family: 'Montserrat', sans-serif;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    max-width: 100%;
+    z-index: 9;
 }
 
 a, h3 {

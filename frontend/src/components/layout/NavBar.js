@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import AutocompleteSearchBar from "./AutocompleteSearchBar";
 import '../../../static/css/Navbar.css';
 
-
 export default class Header extends Component {
     render() {
         return (
