@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import {GET_FOOD_ITEM, GET_FOOD_ITEMS, GET_SEARCH_RESULT} from "./types";
+import {GET_FOOD_ITEM, GET_FOOD_ITEMS, GET_SEARCH_RESULT, GET_CLICKED_ITEM_ID} from "./types";
 
 // GET FOOD ITEMS
 export const getFoodItems = () => dispatch => {
@@ -16,7 +16,7 @@ export const getFoodItems = () => dispatch => {
 
 // GET RESULT OF SEARCH
 export const getSearchResult = (term) => dispatch => {
-    axios.get(`/api/posts/?search=${term}`)
+    axios.get(`/api/posts/?search=${term}/`)
         .then(res => {
             dispatch({
                 type: GET_SEARCH_RESULT,
@@ -26,26 +26,22 @@ export const getSearchResult = (term) => dispatch => {
         .catch(err => console.log(err));
 };
 
-// GET DETAILS OF A FOOD ITEM
-export const getFoodItem = (title) => dispatch => {
-    axios.get(`/api/posts/?title=${title}`)
+//GET DETAILS OF A FOOD ITEM
+export const getFoodItem = (id) => dispatch => {
+    axios.get(`/api/posts/${id}/`)
         .then(res => {
+            console.log(res.data);
             dispatch({
                 type: GET_FOOD_ITEM,
                 payload: res.data
             })
         })
         .catch(err => console.log(err));
-    // return (dispatch, getState) => {
-    //     const allItems = getState().foodItems.allFoodItems;
-    //     let currentItemDetails;
-    //     let item;
-    //     for (item = 0; item < allItems.length; item++) {
-    //         if (allItems[item]['title'] === title);
-    //         currentItemDetails = allItems[item];
-    //         break;
-    //     }
+};
 
-
-    // };
+export const getClickedItemId = (id) => dispatch => {
+    dispatch({
+        type: GET_CLICKED_ITEM_ID,
+        payload: id
+    })
 };

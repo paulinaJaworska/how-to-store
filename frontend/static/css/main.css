@@ -1,0 +1,9 @@
+.main {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.page-content-container {
+    width: 100%;
+    position: absolute;
+    top: 100px;
+}

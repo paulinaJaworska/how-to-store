@@ -1,35 +1,16 @@
 import React, {Component} from 'react';
-
-import NavBar from './layout/NavBar';
-import FoodImagesList from './food_items/FoodImagesList';
-import FoodDetails from './food_items/FoodDetails';
-
 import {Provider} from 'react-redux';
 import store from "../store";
 import {BrowserRouter, Route} from "react-router-dom";
 import ReactDOM from "react-dom";
-import {Switch} from "@material-ui/core";
+
+import '../../static/css/main.css';
+import NavBar from './layout/NavBar';
+import FoodImagesList from './food_items/FoodImagesList';
+import FoodDetails from './food_items/FoodDetails';
+
 
 class AppParent extends Component {
-
-
-// ReactDOM.render(<App/>, document.getElementById("app"));
-
-// return (
-//     <Provider store={store}>
-//         <div>
-//             <NavBar/>
-//             <BrowserRouter>
-//                 <div>
-//                     <Route path="/" exact component={FoodImagesList}/>
-//                     <Route path="/:name" render={} exact component={FoodDetails}/>
-//                 </div>
-//             </BrowserRouter>
-//         </div>
-//     </Provider>
-// );
-
-
     getContent(currentPage) {
         switch (currentPage) {
             case 'foodList':
@@ -53,13 +34,18 @@ class AppParent extends Component {
 
 const routing = (
     <Provider store={store}>
-        <BrowserRouter>
+        <div className="main">
             <NavBar/>
-            <div className="content-wrapper">
-                <Route path="/" exact render={(props) => <AppParent whichPage='foodList' {...props}/>}/>
-                <Route path="/:name" exact render={(props) => <AppParent whichPage='foodDetails' {...props}/>}/>
+            <div className="page-content-container">
+                <BrowserRouter>
+                    <>
+                        <Route path="/" exact render={(props) => <AppParent whichPage='foodList' {...props}/>}/>
+                        <Route path="/:id" exact render={(props) => <FoodDetails {...props}/>}/>
+                        {/*<Route path="/:id" exact render={(props) => <AppParent whichPage='foodDetails' {...props}/>}/>*/}
+                    </>
+                </BrowserRouter>
             </div>
-        </BrowserRouter>
+        </div>
     </Provider>
 );
 

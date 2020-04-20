@@ -93,7 +93,6 @@ class CommentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         return reverse('post-detail', kwargs={'pk': post})
 
 
-
 class CommentAnswerCreateView(LoginRequiredMixin, CreateView):
     """ Adds answer to the comment under a post."""
     model = Comment

@@ -23,6 +23,7 @@ from users import views as user_views
 if settings.DEBUG:
     urlpatterns = [
         path('admin/', admin.site.urls),
+        path('api/', include('blog.urls')),
         path('register/', user_views.register, name='register'),
         path('profile/', user_views.profile, name='profile'),
         path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),
@@ -39,7 +40,8 @@ if settings.DEBUG:
         path('password-reset-complete/',
              auth_views.PasswordResetCompleteView.as_view(template_name='users/password_reset_complete.html'),
              name='password_reset_complete'),
-        path('api/', include('blog.urls')),
+        # path('', include('frontend.urls')),
+
     ]
 
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

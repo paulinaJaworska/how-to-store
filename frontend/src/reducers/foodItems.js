@@ -1,10 +1,10 @@
-import {GET_FOOD_ITEMS, GET_SEARCH_RESULT} from '../actions/types.js'
-import {GET_FOOD_ITEM} from "../actions/types";
+import {GET_FOOD_ITEMS, GET_SEARCH_RESULT, GET_FOOD_ITEM, GET_CLICKED_ITEM_ID} from '../actions/types'
 
 const initialState = {
     foodItems: [],
     allFoodItems: [],
-    foodItem: null
+    foodItem: {},
+    currentlyDisplayedItem: null
 };
 
 export default function (state = initialState, action) {
@@ -19,7 +19,11 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 foodItems: action.payload,
-                foodItem: null
+            };
+        case GET_CLICKED_ITEM_ID:
+            return {
+                ...state,
+                currentlyDisplayedItem: action.payload
             };
         case GET_FOOD_ITEM:
             return {

@@ -23,12 +23,11 @@ class ImageCard extends Component {
         this.setState({spans})
     };
 
-
     render() {
         const {id, title, image} = this.props.item;
 
         return (
-            <Link to={{pathname: `${title}`}} style={{gridRowEnd: `span ${this.state.spans}`}}>
+            <Link to={{pathname: `${id}`}} style={{gridRowEnd: `span ${this.state.spans}`}}>
                 <img ref={this.imageRef} alt={title} src={image}/>
             </Link>
         );
