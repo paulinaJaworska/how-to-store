@@ -25,7 +25,8 @@ class Post(models.Model):
 class Comment(models.Model):
     """ Users comments amd answers to comments(self reference) under each post. """
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    # todo remove null=True
+    author = models.ForeignKey(User, related_name="comments", on_delete=models.CASCADE, null=True)
     content = models.TextField()
     date_posted = models.DateTimeField(default=timezone.now)
     reply_to = models.ForeignKey('self', null=True, related_name='replies', on_delete=models.CASCADE, blank=True)
