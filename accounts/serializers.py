@@ -1,3 +1,5 @@
+from abc import ABC
+
 from rest_framework import serializers
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
@@ -22,3 +24,14 @@ class RegisterSerializer(serializers.ModelSerializer):
                                         validated_data['password']
                                         )
         return user
+
+
+class LoginSerializer(serializers.Serializer):  # Serializer, not modelSerializer because we don't create it.
+    username = serializers.CharField()
+    password = serializers.CharField()
+
+    def validate(self, data):
+        user = authenticate(**data)  # authenticate verifies by default username and password and returns user
+        if user and user.is_active:
+            return user
+        raise serializers.ValidationError("Incorrect Credentials")
