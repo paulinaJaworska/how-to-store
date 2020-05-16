@@ -36,6 +36,7 @@ const routing = (
     <Provider store={store}>
         <div className="main">
             <NavBar/>
+            <Alerts />
             <div className="page-content-container">
                 <BrowserRouter>
                     <>
