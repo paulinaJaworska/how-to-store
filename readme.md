@@ -4,7 +4,7 @@
 to be fresh longer.
 
 Application offers functionalities like displaying food items and searching through them.
-Additionally, registered users can store can add comments. Admin panel lets to manage users and accept or decline their 
+Additionally, registered users can add comments. Admin panel lets to manage users and accept or decline their 
 comments.
 
 
