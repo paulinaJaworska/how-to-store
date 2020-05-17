@@ -13,33 +13,32 @@ import {Alerts} from "./layout/Alerts";
 import {Provider as AlertProvider} from 'react-alert';
 import AlertTemplate from 'react-alert-template-basic';
 
+const alertOptions = {
+    timeout: 4000,
+    position: 'top center'
+};
+
 
 class AppParent extends Component {
 
     render() {
-        // const currentPage = this.props.whichPage;
-        // return (
-        //     <>
-        //         <div>{this.getContent(currentPage)}</div>
-        //     </>
-        // );
         return (
             <Provider store={store}>
                 <div className="main">
-                    {/*<AlertProvider template={AlertTemplate} {...alertOptions}>*/}
-                    <BrowserRouter>
-                        <>
-                            <NavBar/>
-                            {/*<Alerts/>*/}
-                            <div className="page-content-container">
-                                <Switch>
-                                    <Route exact path="/" component={FoodImagesList}/>
-                                    <Route exact path="/:id" component={FoodDetails}/>
-                                </Switch>
-                            </div>
-                        </>
-                    </BrowserRouter>
-                    {/*</AlertProvider>*/}
+                    <AlertProvider template={AlertTemplate} {...alertOptions}>
+                        <BrowserRouter>
+                            <>
+                                <NavBar />
+                                <Alerts />
+                                <div className="page-content-container">
+                                    <Switch>
+                                        <Route exact path="/" component={FoodImagesList}/>
+                                        <Route exact path="/:id" component={FoodDetails}/>
+                                    </Switch>
+                                </div>
+                            </>
+                        </BrowserRouter>
+                    </AlertProvider>
                 </div>
             </Provider>
         )
