@@ -42,9 +42,8 @@ if settings.DEBUG:
         path('password-reset-complete/',
              auth_views.PasswordResetCompleteView.as_view(template_name='users/password_reset_complete.html'),
              name='password_reset_complete'),
-        # path('', include('frontend.urls')),
 
-        path('', include('accounts.urls')),
+        # path('', include('accounts.urls')),
 
     ]
 
@@ -52,4 +51,4 @@ if settings.DEBUG:
 
     # Paths to frontend must be at the end, otherwise images are not displayed properly.
     # Due to using all match regex in frontend urls no 404 will be shown when page not found
-    urlpatterns += [path('', include('frontend.urls'))]
+    # urlpatterns += [path('', include('frontend.urls'))]
