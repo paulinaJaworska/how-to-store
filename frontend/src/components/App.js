@@ -35,9 +35,9 @@ class AppParent extends Component {
                                 <div className="page-content-container">
                                     <Switch>
                                         <Route exact path="/" component={FoodImagesList}/>
-                                        <Route exact path="/:id" component={FoodDetails}/>
                                         <Route exact path="/register" component={Register}/>
                                         <Route exact path="/login" component={Login}/>
+                                        <Route exact path="/:id" component={FoodDetails}/>
                                     </Switch>
                                 </div>
                             </>
