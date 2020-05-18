@@ -12,6 +12,8 @@ import {Alerts} from "./layout/Alerts";
 
 import {Provider as AlertProvider} from 'react-alert';
 import AlertTemplate from 'react-alert-template-basic';
+import Register from "./accounts/Register";
+import Login from "./accounts/Login";
 
 const alertOptions = {
     timeout: 4000,
@@ -34,6 +36,8 @@ class AppParent extends Component {
                                     <Switch>
                                         <Route exact path="/" component={FoodImagesList}/>
                                         <Route exact path="/:id" component={FoodDetails}/>
+                                        <Route exact path="/register" component={Register}/>
+                                        <Route exact path="/login" component={Login}/>
                                     </Switch>
                                 </div>
                             </>
