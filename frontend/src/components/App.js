@@ -8,12 +8,14 @@ import '../../static/css/main.css';
 import NavBar from './layout/NavBar';
 import FoodImagesList from './food_items/FoodImagesList';
 import FoodDetails from './food_items/FoodDetails';
-import {Alerts} from "./layout/Alerts";
 
+import {Alerts} from "./layout/Alerts";
 import {Provider as AlertProvider} from 'react-alert';
 import AlertTemplate from 'react-alert-template-basic';
+
 import Register from "./accounts/Register";
 import Login from "./accounts/Login";
+import PrivateRoute from "./common/PrivateRoute";
 
 const alertOptions = {
     timeout: 4000,
@@ -38,6 +40,8 @@ class AppParent extends Component {
                                         <Route exact path="/register" component={Register}/>
                                         <Route exact path="/login" component={Login}/>
                                         <Route exact path="/:id" component={FoodDetails}/>
+                                        <PrivateRoute exact path="/comments/new"/>
+                                        <PrivateRoute exact path="comments/edit/:id"/>
                                     </Switch>
                                 </div>
                             </>
