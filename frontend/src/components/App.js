@@ -16,6 +16,7 @@ import AlertTemplate from 'react-alert-template-basic';
 import Register from "./accounts/Register";
 import Login from "./accounts/Login";
 import PrivateRoute from "./common/PrivateRoute";
+import {loadUser} from "../actions/auth";
 
 const alertOptions = {
     timeout: 4000,
@@ -24,6 +25,10 @@ const alertOptions = {
 
 
 class AppParent extends Component {
+
+    componentDidMount() {
+        store.dispatch(loadUser());
+    }
 
     render() {
         return (
@@ -40,6 +45,7 @@ class AppParent extends Component {
                                         <Route exact path="/register" component={Register}/>
                                         <Route exact path="/login" component={Login}/>
                                         <Route exact path="/:id" component={FoodDetails}/>
+                                        {/* todo */}
                                         <PrivateRoute exact path="/comments/new"/>
                                         <PrivateRoute exact path="comments/edit/:id"/>
                                     </Switch>
