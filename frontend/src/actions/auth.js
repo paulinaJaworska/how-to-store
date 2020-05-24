@@ -1,6 +1,15 @@
 import axios from 'axios';
 import {returnErrors} from "./messages";
-import {USER_LOADING, USER_LOADED, AUTH_ERROR, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT_SUCCESS} from "./types";
+import {
+    USER_LOADING,
+    USER_LOADED,
+    AUTH_ERROR,
+    LOGIN_SUCCESS,
+    LOGIN_FAIL,
+    LOGOUT_SUCCESS,
+    REGISTER_SUCCESS,
+    REGISTER_FAIL
+} from "./types";
 
 // Check token and load a user
 export const loadUser = () => (dispatch, getState) => {
@@ -14,10 +23,10 @@ export const loadUser = () => (dispatch, getState) => {
                 payload: res.data
             });
         }).catch(err => {
-            dispatch(returnErrors(err.response.data, err.response.status));
-            dispatch({
-                type: AUTH_ERROR
-            })
+        dispatch(returnErrors(err.response.data, err.response.status));
+        dispatch({
+            type: AUTH_ERROR
+        })
     })
 };
 
@@ -40,10 +49,10 @@ export const login = (username, password) => dispatch => {
                 payload: res.data
             });
         }).catch(err => {
-            dispatch(returnErrors(err.response.data, err.response.status));
-            dispatch({
-                type: LOGIN_FAIL
-            })
+        dispatch(returnErrors(err.response.data, err.response.status));
+        dispatch({
+            type: LOGIN_FAIL
+        })
     })
 };
 
@@ -60,7 +69,7 @@ export const logout = () => (dispatch, getState) => {
     };
 
     // if there is a token, add it to headers config
-    if(token) {
+    if (token) {
         config.headers['Authorization'] = `Token ${token}`;
     }
 
@@ -71,9 +80,36 @@ export const logout = () => (dispatch, getState) => {
                 payload: res.data
             });
         }).catch(err => {
-            dispatch(returnErrors(err.response.data, err.response.status));
+        dispatch(returnErrors(err.response.data, err.response.status));
     })
 };
+
+// REGISTER USER
+export const register = ({username, password, email}) => dispatch => {
+    // headers
+    const config = {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    };
+
+    // request body
+    const body = JSON.stringify({username, password});
+
+    axios.post('api/auth/register', body, config)
+        .then(res => {
+            dispatch({
+                type: REGISTER_SUCCESS,
+                payload: res.data
+            });
+        }).catch(err => {
+        dispatch(returnErrors(err.response.data, err.response.status));
+        dispatch({
+            type: REGISTER_FAIL
+        })
+    })
+};
+
 
 export const tokenConfig = (getState) => {
     // get token from state
@@ -87,7 +123,7 @@ export const tokenConfig = (getState) => {
     };
 
     // if there is a token, add it to headers config
-    if(token) {
+    if (token) {
         config.headers['Authorization'] = `Token ${token}`;
     }
 
