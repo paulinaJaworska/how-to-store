@@ -1,10 +1,46 @@
-import React, {Component} from 'react';
+import React, {Component} from "react";
 import AutocompleteSearchBar from "./AutocompleteSearchBar";
-import '../../../static/css/Navbar.css';
 import {Link} from "react-router-dom";
+import PropTypes from "prop-types";
+import '../../../static/css/Navbar.css';
 
 export default class Header extends Component {
+    static propTypes = {
+        auth: PropTypes.object.isRequired
+    };
+
     render() {
+        const {isAuthenticated, user} = this.props.auth;
+        const authLinks = (
+            <ul className="navbar-nav mr-auto col-2 d-flex justify-content-end">
+                <li className="nav-item active my-2">
+                    <div className="nav-link">
+                        {user ? `Welcome ${user.username}` : ''}
+                        <span className="sr-only">(current)</span>
+                    </div>
+                </li>
+                <li className="nav-item active my-2">
+                    <Link to="/logout" className="nav-link">
+                        Logout<span className="sr-only">(current)</span>
+                    </Link>
+                </li>
+            </ul>
+        );
+        const guestLinks = (
+                <ul className="navbar-nav mr-auto col-2 d-flex justify-content-end">
+                    <li className="nav-item active my-2">
+                        <Link to="/register" className="nav-link">
+                            Register<span className="sr-only">(current)</span>
+                        </Link>
+                    </li>
+                    <li className="nav-item active my-2">
+                        <Link to="/login" className="nav-link">
+                            Login<span className="sr-only">(current)</span>
+                        </Link>
+                    </li>
+                </ul>
+            )
+        ;
         return (
             <nav className="navbar navbar-expand-lg navbar-light">
                 <div className="container">
@@ -31,14 +67,7 @@ export default class Header extends Component {
                                     </li>
                                     <AutocompleteSearchBar/>
                                 </ul>
-                                <ul className="navbar-nav mr-auto col-2 d-flex justify-content-end">
-                                    <li className="nav-item active my-2">
-                                        <Link to="/register" className="nav-link">Register<span className="sr-only">(current)</span></Link>
-                                    </li>
-                                    <li className="nav-item active my-2">
-                                        <Link to="/login" className="nav-link">Login<span className="sr-only">(current)</span></Link>
-                                    </li>
-                                </ul>
+                                { isAuthenticated ? authLinks : guestLinks }
                             </div>
                         </div>
                     </div>
