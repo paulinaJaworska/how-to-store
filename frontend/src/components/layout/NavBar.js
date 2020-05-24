@@ -3,8 +3,10 @@ import AutocompleteSearchBar from "./AutocompleteSearchBar";
 import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
 import '../../../static/css/Navbar.css';
+import {connect} from "react-redux";
+import {logout} from "../../actions/auth";
 
-export default class Header extends Component {
+class Header extends Component {
     static propTypes = {
         auth: PropTypes.object.isRequired
     };
@@ -14,15 +16,15 @@ export default class Header extends Component {
         const authLinks = (
             <ul className="navbar-nav mr-auto col-2 d-flex justify-content-end">
                 <li className="nav-item active my-2">
-                    <div className="nav-link">
-                        {user ? `Welcome ${user.username}` : ''}
+                    <a id="user-name" className="nav-link">
+                        {user ? `${user.username}` : ''}
                         <span className="sr-only">(current)</span>
-                    </div>
+                    </a>
                 </li>
                 <li className="nav-item active my-2">
-                    <Link to="/logout" className="nav-link">
-                        Logout<span className="sr-only">(current)</span>
-                    </Link>
+                    <button onClick={this.props.logout} type="button" className="nav-link btn btn-link">
+                        <a>Logout</a><span className="sr-only">(current)</span>
+                    </button>
                 </li>
             </ul>
         );
@@ -67,7 +69,7 @@ export default class Header extends Component {
                                     </li>
                                     <AutocompleteSearchBar/>
                                 </ul>
-                                { isAuthenticated ? authLinks : guestLinks }
+                                {isAuthenticated ? authLinks : guestLinks}
                             </div>
                         </div>
                     </div>
@@ -76,3 +78,9 @@ export default class Header extends Component {
         )
     }
 }
+
+const mapStateToProps = (state) => ({
+    auth: state.auth
+});
+
+export default connect(mapStateToProps, {logout})(Header)

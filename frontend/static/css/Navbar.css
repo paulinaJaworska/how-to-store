@@ -11,14 +11,23 @@
     z-index: 9;
 }
 
-a, h3 {
+/*.right-menu {*/
+/*    color: white !important;*/
+/*}*/
+
+.nav-link, h3 {
     color: white !important;
 }
 
-a:hover {
+#user-name.nav-link {
+    text-decoration: none !important;
+}
+
+.nav-link:hover {
     text-decoration-color: white !important;
     text-decoration: underline !important;
 }
+
 
 /*AutocompleteSearchBar*/
 
