@@ -22,7 +22,7 @@ if settings.DEBUG:
 
     urlpatterns = [
         path('admin/', admin.site.urls),
-        path('api/auth/', include('accounts.urls')),
+        path('', include('accounts.urls')),
         path('api/', include('blog.urls')),
     ]
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
