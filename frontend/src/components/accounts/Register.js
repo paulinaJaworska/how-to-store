@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {register} from '../../actions/auth';
 import {createMessage} from "../../actions/messages";
+import '../../../static/css/main.css';
 
 
 class Register extends Component {
@@ -88,7 +89,7 @@ class Register extends Component {
                             />
                         </div>
                         <div className="form-group">
-                            <button type="submit" className="btn btn-primary">
+                            <button type="submit" className="btn brown-btn">
                                 Register
                             </button>
                         </div>

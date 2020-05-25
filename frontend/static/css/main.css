@@ -7,3 +7,17 @@
     position: absolute;
     top: 100px;
 }
+
+.brown-btn {
+    background-color: #5a3921;
+    color: white;
+}
+
+.brown-btn:hover {
+    color: white;
+    text-decoration: underline;
+}
+
+yellow-bgr{
+    background-color: #ffffb5;
+}

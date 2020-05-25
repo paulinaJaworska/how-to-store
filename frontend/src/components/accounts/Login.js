@@ -55,7 +55,7 @@ class Login extends Component {
                             />
                         </div>
                         <div className="form-group">
-                            <button type="submit" className="btn btn-primary">
+                            <button type="submit" className="btn brown-btn">
                                 Login
                             </button>
                         </div>
