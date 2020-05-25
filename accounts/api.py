@@ -36,6 +36,7 @@ class UserAPI(generics.RetrieveAPIView):
     Retrieves the user based and token, so it can be sent in request.
     Headers: Authorisation: Token ......
     """
+    #  authentication_classes = (TokenAuthentication,)
     permission_classes = [
         permissions.IsAuthenticated
     ]

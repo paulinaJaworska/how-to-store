@@ -5,6 +5,7 @@ import {connect} from "react-redux";
 import {register} from '../../actions/auth';
 import {createMessage} from "../../actions/messages";
 
+
 class Register extends Component {
     state = {
         username: '',

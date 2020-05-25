@@ -8,5 +8,5 @@ export default combineReducers({
     foodItems,
     errors,
     messages,
-    auth
+    auth,
 })
