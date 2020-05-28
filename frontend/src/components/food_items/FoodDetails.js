@@ -3,6 +3,7 @@ import {connect} from "react-redux";
 import '../../../static/css/FoodDetails.css'
 
 import {getFoodItem} from "../../actions/foodItems";
+import Comments from "./Comments";
 
 
 class FoodDetails extends Component {
@@ -30,7 +31,7 @@ class FoodDetails extends Component {
                         <h2>Ripeness</h2>
                         <p>{ripeness}</p>
                     </div>
-                    <div className="col col-lg-12 col-xs-12 col-md-12 comments-bar"><h5>Comments</h5></div>
+                    <Comments/>
                 </div>
                 {/*<div className="box stack-top row">{title}</div>*/}
             </div>

@@ -17,13 +17,14 @@ class PostViewSet(viewsets.ModelViewSet):
 
 class CommentViewSet(viewsets.ModelViewSet):
     queryset = Comment.objects.all()
-    serializer_class = CommentSerializer
     permission_classes = [
-        permissions.IsAuthenticated
+        # permissions.IsAuthenticated
+        permissions.AllowAny
     ]
+    serializer_class = CommentSerializer
 
-    def get_queryset(self):
-        return self.request.user.model.all()
+    # def get_queryset(self):
+    #     return self.request.user.model.all()
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
