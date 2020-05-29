@@ -1,9 +1,49 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import '../../../static/css/comments.css'
+import {getComments} from "../../actions/comments";
 
-export default class MyComponent extends Component {
+
+class Comments extends Component {
+    componentDidMount() {
+        this.props.getComments(this.props.currentlyDisplayedItem);
+
+    }
+
     render() {
+        const {comments} = this.props.foodItem;
+        let postComments;
+        if (comments !== undefined) {
+            console.log(comments);
+            postComments = comments.map((comment) => {
+                // date_posted = comment.date_posted.format(date);
+                return (
+                    <div className="media">
+                        {/*<a className="media-left" href="#">*/}
+                        {/*    <img src="http://lorempixel.com/40/40/people/1/"/>*/}
+                        {/*</a>*/}
+
+                        <div className="media-body">
+
+                            <h4 className="media-heading user_name">{comment.author.username} <p
+                                className="date pull-right">
+                                <small>{new Intl.DateTimeFormat("en-GB", {
+                                    year: "numeric",
+                                    month: "long",
+                                    day: "2-digit"
+                                }).format(comment.date_published)}</small></p></h4>
+
+                            {comment.content}
+                            {/*todo*/}
+                            {/*<p><small><a href="">Like</a></small></p>*/}
+                        </div>
+                    </div>
+                )
+            })
+        }
+
+
+        // const {author, content, date_posted, reply_to}
         return (
             <div className="container">
                 <div className="row">
@@ -14,21 +54,7 @@ export default class MyComponent extends Component {
                             </div>
                         </div>
                         <div className="comments-list">
-
-                            <div className="media">
-                                <a className="media-left" href="#">
-                                    <img src="http://lorempixel.com/40/40/people/1/"/>
-                                </a>
-
-                                <div className="media-body">
-
-                                    <h4 className="media-heading user_name">Baltej Singh <p className="date pull-right">
-                                        <small>5 days ago</small></p></h4>
-
-                                    Wow! this is really great.
-                                    <p><small><a href="">Like</a></small></p>
-                                </div>
-                            </div>
+                            {postComments}
                         </div>
                     </div>
                 </div>
@@ -37,10 +63,9 @@ export default class MyComponent extends Component {
     }
 }
 
-// function mapStateToProps(state) {
-//     return {};
-// }
-//
-// export default connect(
-//     mapStateToProps,
-// )(MyComponent);
+const mapStateToProps = (state) => ({
+    comments: state.comments.comments,
+    foodItem: state.foodItems.foodItem
+});
+
+export default connect(mapStateToProps, {getComments})(Comments);

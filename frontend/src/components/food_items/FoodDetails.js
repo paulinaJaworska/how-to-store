@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from "react-redux";
 import '../../../static/css/FoodDetails.css'
 
-import {getFoodItem} from "../../actions/foodItems";
+import {getFoodItem, getClickedItemId} from "../../actions/foodItems";
 import Comments from "./Comments";
 
 
@@ -11,7 +11,7 @@ class FoodDetails extends Component {
     componentDidMount() {
         // get id from url parameter
         this.props.getFoodItem(this.props.match.params.id);
-        console.log(this.props.foodItem);
+        this.props.getClickedItemId(this.props.match.params.id);
     }
 
     render() {
@@ -31,7 +31,7 @@ class FoodDetails extends Component {
                         <h2>Ripeness</h2>
                         <p>{ripeness}</p>
                     </div>
-                    <Comments/>
+                    <Comments />
                 </div>
                 {/*<div className="box stack-top row">{title}</div>*/}
             </div>
@@ -40,7 +40,8 @@ class FoodDetails extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    foodItem: state.foodItems.foodItem
+    foodItem: state.foodItems.foodItem,
+    currentlyDisplayedItem: state.foodItems.currentlyDisplayedItem
 });
 
-export default connect(mapStateToProps, {getFoodItem})(FoodDetails);
+export default connect(mapStateToProps, {getFoodItem, getClickedItemId})(FoodDetails);

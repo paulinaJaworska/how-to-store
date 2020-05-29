@@ -4,10 +4,10 @@ import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 
 export class Alerts extends Component {
-    static propTypes = {
-        error: PropTypes.object.isRequired,
-        message: PropTypes.object.isRequired,
-    };
+    // static propTypes = {
+    //     error: PropTypes.object.isRequired,
+    //     message: PropTypes.object.isRequired,
+    // };
 
     componentDidUpdate(prevProps) {
         console.log(this.props);

@@ -35,7 +35,6 @@ export const getSearchResult = (term) => dispatch => {
 export const getFoodItem = (id) => dispatch => {
     axios.get(`/api/posts/${id}/`)
         .then(res => {
-            console.log(res.data);
             dispatch({
                 type: GET_FOOD_ITEM,
                 payload: res.data
