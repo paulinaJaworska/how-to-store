@@ -1,11 +1,21 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import '../../../static/css/comments.css'
+import {saveComment} from "../../actions/comments";
 
 
 class Comments extends Component {
     state = {
         comment: '',
+    };
+
+    onChange = e => this.setState({[e.target.name]: e.target.value});
+
+    onSubmit = e => {
+        e.preventDefault();
+        if (this.state.comment.length > 0) {
+            this.props.saveComment(this.state.comment);
+        }
     };
 
     render() {
@@ -14,7 +24,7 @@ class Comments extends Component {
         if (comments !== undefined) {
             postComments = comments.map((comment) => {
                 return (
-                    <div className="media">
+                    <div className="media" key={comment.id}>
                         {/*<a className="media-left" href="#">*/}
                         {/*    <img src="http://lorempixel.com/40/40/people/1/"/>*/}
                         {/*</a>*/}
@@ -38,7 +48,6 @@ class Comments extends Component {
             })
         }
 
-
         // const {author, content, date_posted, reply_to}
         return (
             <div className="container w-100 comments-section">
@@ -56,9 +65,10 @@ class Comments extends Component {
                             <form onSubmit={this.onSubmit}>
                                 <div>
                                     <label>Write your comment:</label>
-                                    <input type="input"
+                                    <input type="text"
                                            className="form-control"
                                            name="comment"
+                                           onChange={this.onChange}
                                            value={this.state.comment}
                                     />
                                 </div>
@@ -80,4 +90,4 @@ const mapStateToProps = (state) => ({
     foodItem: state.foodItems.foodItem
 });
 
-export default connect(mapStateToProps)(Comments);
+export default connect(mapStateToProps, {saveComment})(Comments);

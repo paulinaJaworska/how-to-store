@@ -18,24 +18,24 @@ class FoodDetails extends Component {
         const {title, image, storage, description, ripeness} = this.props.foodItem;
         return (
             <>
-            <div className="container-fluid w-100 full-page">
-                <div className="row center-block">
-                    <div className="col col-lg-6 col-xs-12 col-md-12 square image-container">
-                        <img ref={this.imageRef} alt={title} src={image}/>
+                <div className="container-fluid w-100 full-page">
+                    <div className="row center-block">
+                        <div className="col col-lg-6 col-xs-12 col-md-12 square image-container">
+                            <img ref={this.imageRef} alt={title} src={image}/>
+                        </div>
+                        <div className="col col-lg-6 col-xs-12 col-md-12 square text-content">
+                            <h1>{title}</h1><br/>
+                            <h2>Storage</h2>
+                            <p>{storage}</p>
+                            <h2>Description</h2>
+                            <p>{description}</p>
+                            <h2>Ripeness</h2>
+                            <p>{ripeness}</p>
+                        </div>
                     </div>
-                    <div className="col col-lg-6 col-xs-12 col-md-12 square text-content">
-                        <h1>{title}</h1><br/>
-                        <h2>Storage</h2>
-                        <p>{storage}</p>
-                        <h2>Description</h2>
-                        <p>{description}</p>
-                        <h2>Ripeness</h2>
-                        <p>{ripeness}</p>
-                    </div>
+                    {/*<div className="box stack-top row">{title}</div>*/}
                 </div>
-                {/*<div className="box stack-top row">{title}</div>*/}
-            </div>
-            <Comments />
+                <Comments/>
             </>
         );
     }
