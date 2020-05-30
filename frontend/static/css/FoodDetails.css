@@ -27,6 +27,7 @@ img {
     border-left: solid;
     border-color: #5a3921;
     border-width: 15px;
+    margin-bottom: 20px;
 }
 
 /*COMMENTS PART*/
@@ -41,3 +42,7 @@ img {
 }
 
 
+.food-details {
+    height: inherit;
+
+}

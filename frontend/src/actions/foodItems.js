@@ -5,7 +5,7 @@ import {returnErrors} from "./messages";
 
 // GET FOOD ITEMS
 export const getFoodItems = () => dispatch => {
-    axios.get('/api/posts/')
+    axios.get('api/posts/')
         .then(res => {
             dispatch({
                 type: GET_FOOD_ITEMS,
@@ -19,7 +19,7 @@ export const getFoodItems = () => dispatch => {
 
 // GET RESULT OF SEARCH
 export const getSearchResult = (term) => dispatch => {
-    axios.get(`/api/posts/?search=${term}/`)
+    axios.get(`api/posts/?search=${term}/`)
         .then(res => {
             dispatch({
                 type: GET_SEARCH_RESULT,
@@ -33,7 +33,7 @@ export const getSearchResult = (term) => dispatch => {
 
 //GET DETAILS OF A FOOD ITEM
 export const getFoodItem = (id) => dispatch => {
-    axios.get(`/api/posts/${id}/`)
+    axios.get(`api/posts/${id}/`)
         .then(res => {
             dispatch({
                 type: GET_FOOD_ITEM,

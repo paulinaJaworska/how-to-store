@@ -1,23 +1,32 @@
 import axios from 'axios';
 import {SAVE_COMMENT} from "./types";
-import {returnErrors} from "./messages";
+import {createMessage, returnErrors} from "./messages";
 
-export const saveComment = ({comment}) => dispatch => {
+export const addComment = (post, content) => (dispatch, getState) => {
+    const token = getState().auth.token;
+
     const config = {
         headers: {
             'Content-Type': 'application/json'
         }
     };
 
-    const body = JSON.stringify({comment});
+    // if there is a token, add it to headers config
+    if (token) {
+        config.headers['Authorization'] = `Token ${token}`;
+    }
 
-    axios.post('api/comments/new', body, config)
+
+    const body = JSON.stringify({post, content});
+
+    axios.post(`api/comments/`, body, config)
         .then(res => {
+            dispatch(createMessage({addComment: 'Comment added'}));
             dispatch({
                 type: SAVE_COMMENT,
                 payload: res.data
             });
         }).catch(err => {
-        dispatch(returnErrors(err.response.data, err.respose.status));
+        dispatch(returnErrors(err.response.data, err.response.status));
     })
 };

@@ -19,12 +19,12 @@ from django.contrib import admin
 from django.urls import path, include
 
 if settings.DEBUG:
-
     urlpatterns = [
         path('admin/', admin.site.urls),
-        path('', include('accounts.urls')),
         path('api/', include('blog.urls')),
+        path('', include('accounts.urls')),
     ]
+
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
     # Paths to frontend must be at the end, otherwise images are not displayed properly.

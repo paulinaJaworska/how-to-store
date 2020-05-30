@@ -9,7 +9,7 @@ class CommentSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Comment
-        fields = ('author', 'content', 'date_posted', 'reply_to')
+        fields = '__all__'
 
 
 class PostSerializer(serializers.ModelSerializer):

@@ -7,11 +7,14 @@ import Comments from "./Comments";
 
 
 class FoodDetails extends Component {
+    state = {
+        post_id: this.props.match.params.id,
+    };
 
     componentDidMount() {
         // get id from url parameter
-        this.props.getFoodItem(this.props.match.params.id);
-        this.props.getClickedItemId(this.props.match.params.id);
+        this.props.getFoodItem(this.state.post_id);
+        this.props.getClickedItemId(this.state.post_id);
     }
 
     render() {
@@ -19,7 +22,7 @@ class FoodDetails extends Component {
         return (
             <>
                 <div className="container-fluid w-100 full-page">
-                    <div className="row center-block">
+                    <div className="row center-block food-details">
                         <div className="col col-lg-6 col-xs-12 col-md-12 square image-container">
                             <img ref={this.imageRef} alt={title} src={image}/>
                         </div>
@@ -35,7 +38,7 @@ class FoodDetails extends Component {
                     </div>
                     {/*<div className="box stack-top row">{title}</div>*/}
                 </div>
-                <Comments/>
+                <Comments postId={this.state.post_id}/>
             </>
         );
     }

@@ -1,12 +1,21 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import '../../../static/css/comments.css'
-import {saveComment} from "../../actions/comments";
+import {addComment} from "../../actions/comments";
+import PropTypes from "prop-types";
+import {getFoodItem} from "../../actions/foodItems";
 
 
 class Comments extends Component {
     state = {
+        post_id: this.props.postId,
         comment: '',
+
+    };
+
+    static propTypes = {
+        addComment: PropTypes.func.isRequired,
+        getFoodItem: PropTypes.func.isRequired,
     };
 
     onChange = e => this.setState({[e.target.name]: e.target.value});
@@ -14,7 +23,8 @@ class Comments extends Component {
     onSubmit = e => {
         e.preventDefault();
         if (this.state.comment.length > 0) {
-            this.props.saveComment(this.state.comment);
+            this.props.addComment(this.state.post_id, this.state.comment);
+            this.props.getFoodItem(this.state.post_id);
         }
     };
 
@@ -90,4 +100,4 @@ const mapStateToProps = (state) => ({
     foodItem: state.foodItems.foodItem
 });
 
-export default connect(mapStateToProps, {saveComment})(Comments);
+export default connect(mapStateToProps, {addComment, getFoodItem})(Comments);
