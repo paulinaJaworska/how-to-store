@@ -1,22 +1,18 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import '../../../static/css/comments.css'
-import {getComments} from "../../actions/comments";
 
 
 class Comments extends Component {
-    componentDidMount() {
-        this.props.getComments(this.props.currentlyDisplayedItem);
-
-    }
+    state = {
+        comment: '',
+    };
 
     render() {
         const {comments} = this.props.foodItem;
         let postComments;
         if (comments !== undefined) {
-            console.log(comments);
             postComments = comments.map((comment) => {
-                // date_posted = comment.date_posted.format(date);
                 return (
                     <div className="media">
                         {/*<a className="media-left" href="#">*/}
@@ -45,8 +41,8 @@ class Comments extends Component {
 
         // const {author, content, date_posted, reply_to}
         return (
-            <div className="container">
-                <div className="row">
+            <div className="container w-100 comments-section">
+                <div className="row w-100">
                     <div className="col-md-12">
                         <div className="page-header">
                             <div className="col col-lg-12 col-xs-12 col-md-12 comments-bar">
@@ -56,6 +52,23 @@ class Comments extends Component {
                         <div className="comments-list">
                             {postComments}
                         </div>
+                        <div className="comments-list pt-5">
+                            <form onSubmit={this.onSubmit}>
+                                <div>
+                                    <label>Write your comment:</label>
+                                    <input type="input"
+                                           className="form-control"
+                                           name="comment"
+                                           value={this.state.comment}
+                                    />
+                                </div>
+                                <div className="m-3">
+                                    <button type="submit" className="btn brown-btn">
+                                        Add comment
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -64,8 +77,7 @@ class Comments extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    comments: state.comments.comments,
     foodItem: state.foodItems.foodItem
 });
 
-export default connect(mapStateToProps, {getComments})(Comments);
+export default connect(mapStateToProps)(Comments);

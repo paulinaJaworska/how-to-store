@@ -18,6 +18,12 @@
     text-decoration: underline;
 }
 
-yellow-bgr{
+.yellow-bgr{
     background-color: #ffffb5;
+}
+
+.full-page {
+    height: 86vh;
+    overflow:hidden;
+    position:relative;
 }

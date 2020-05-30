@@ -17,7 +17,8 @@ class FoodDetails extends Component {
     render() {
         const {title, image, storage, description, ripeness} = this.props.foodItem;
         return (
-            <div className="container-fluid w-100">
+            <>
+            <div className="container-fluid w-100 full-page">
                 <div className="row center-block">
                     <div className="col col-lg-6 col-xs-12 col-md-12 square image-container">
                         <img ref={this.imageRef} alt={title} src={image}/>
@@ -31,10 +32,11 @@ class FoodDetails extends Component {
                         <h2>Ripeness</h2>
                         <p>{ripeness}</p>
                     </div>
-                    <Comments />
                 </div>
                 {/*<div className="box stack-top row">{title}</div>*/}
             </div>
+            <Comments />
+            </>
         );
     }
 }
