@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {Provider} from 'react-redux';
 import store from "../store";
-import {BrowserRouter, Route, Switch, HashRouter as Router} from "react-router-dom";
+// Using HashRouter prevents incorrect request urls after refreshing page
+import {Route, Switch, HashRouter as Router} from "react-router-dom";
 import ReactDOM from "react-dom";
 
 import '../../static/css/main.css';
@@ -35,7 +36,7 @@ class AppParent extends Component {
             <Provider store={store}>
                 <div className="main">
                     <AlertProvider template={AlertTemplate} {...alertOptions}>
-                        <BrowserRouter>
+                        <Router>
                             <>
                                 <NavBar />
                                 <div className="page-content-container">
@@ -51,7 +52,7 @@ class AppParent extends Component {
                                     </Switch>
                                 </div>
                             </>
-                        </BrowserRouter>
+                        </Router>
                     </AlertProvider>
                 </div>
             </Provider>

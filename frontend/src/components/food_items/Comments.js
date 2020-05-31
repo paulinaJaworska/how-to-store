@@ -41,15 +41,15 @@ class Comments extends Component {
 
                         <div className="media-body">
 
-                            <h4 className="media-heading user_name">{comment.author.username} <p
-                                className="date pull-right">
-                                <small>{new Intl.DateTimeFormat("en-GB", {
-                                    year: "numeric",
-                                    month: "long",
-                                    day: "2-digit"
-                                }).format(comment.date_published)}</small></p></h4>
-
+                            <h4 className="media-heading user_name">{comment.author.username}
+                                <p className="date pull-right">
+                                    {comment.date_posted.slice(0,10)}
+                                </p>
+                            </h4>
+                            <p>
                             {comment.content}
+                            <span>adk</span>
+                            </p>
                             {/*todo*/}
                             {/*<p><small><a href="">Like</a></small></p>*/}
                         </div>
