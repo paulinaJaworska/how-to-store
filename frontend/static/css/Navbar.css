@@ -15,10 +15,6 @@
     color: white !important;
 }
 
-#user-name.nav-link {
-    text-decoration: none !important;
-}
-
 .nav-link:hover {
     text-decoration-color: white !important;
     text-decoration: underline !important;

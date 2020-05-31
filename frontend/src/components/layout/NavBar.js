@@ -16,10 +16,10 @@ class Header extends Component {
         const authLinks = (
             <ul className="navbar-nav mr-auto col-2 d-flex justify-content-end">
                 <li className="nav-item active my-2">
-                    <a id="user-name" className="nav-link">
+                    <Link to="/profile" id="user-name" className="nav-link">
                         {user ? `${user.username}` : ''}
                         <span className="sr-only">(current)</span>
-                    </a>
+                    </Link>
                 </li>
                 <li className="nav-item active my-2">
                     <button onClick={this.props.logout} type="button" className="nav-link btn btn-link">

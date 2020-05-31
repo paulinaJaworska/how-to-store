@@ -18,6 +18,7 @@ import Register from "./accounts/Register";
 import Login from "./accounts/Login";
 import PrivateRoute from "./common/PrivateRoute";
 import {loadUser} from "../actions/auth";
+import Profile from "./accounts/Profile";
 
 const alertOptions = {
     timeout: 3000,
@@ -28,6 +29,7 @@ const alertOptions = {
 class AppParent extends Component {
 
     componentDidMount() {
+        // with every load of the page update if userIsAuthenticated
         store.dispatch(loadUser());
     }
 
@@ -42,12 +44,13 @@ class AppParent extends Component {
                                 <div className="page-content-container">
                                     <Alerts/>
                                     <Switch>
+                                        {/*Private route to check if user is logged in*/}
+                                        <PrivateRoute exact path="/profile" component={Profile}/>
                                         <Route exact path="/" component={FoodImagesList}/>
                                         <Route exact path="/register" component={Register}/>
                                         <Route exact path="/login" component={Login}/>
                                         <Route exact path="/:id" component={FoodDetails}/>
                                         {/* todo */}
-                                        <PrivateRoute exact path="/comments/new"/>
                                         <PrivateRoute exact path="comments/edit/:id"/>
                                     </Switch>
                                 </div>
