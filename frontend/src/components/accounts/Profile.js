@@ -1,122 +1,161 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import '../../../static/css/Profile.css';
+import PropTypes from "prop-types";
+import {updateUser} from "../../actions/auth";
 
-export default class Profile extends Component {
+class Profile extends Component {
+    state = {
+        username: '',
+        email: '',
+        password: '',
+        password2: ''
+    };
+
+    static propTypes = {
+        updateUser: PropTypes.func.isRequired,
+    };
+
+    onSubmit = e => {
+        e.preventDefault();
+        const {username, email, password, password2} = this.state;
+        if (password !== password2) {
+            this.props.createMessage({passwordNotMatch: 'Passwords do not match'});
+        } else {
+            let updatedUser;
+            // if user didn't enter anything in password fields, so don't send it in the body
+            if (password.length === 0 && password2.length === 0) {
+                updatedUser = {
+                    username,
+                    email
+                };
+            } else {
+                updatedUser = {
+                    username,
+                    email,
+                    password
+                };
+            }
+            this.props.updateUser(updatedUser);
+        }
+    };
+
+    onChange = e => this.setState({[e.target.name]: e.target.value});
+
     render() {
+        const {username, email} = this.props.user;
         return (
-                <div className="container bootstrap snippet">
-                    <div className="row">
-                        <div className="col-sm-10"><h1>User name</h1></div>
-                        <div className="col-sm-2"><a href="/users" className="pull-right">
-                            <img title="profile image"
-                                 className="img-circle img-responsive"
-                                 src="http://www.gravatar.com/avatar/28fd20ccec6865e2d5f0e1f4446eb7bf?s=100"/></a>
+            <div className="container bootstrap snippet">
+                <div className="row">
+                    <div className="col-sm-8"><h1 className="user-name">{username}</h1></div>
+                </div>
+
+                <div className="row">
+                    <div className="col-sm-6 col-md-6">
+                        {/*left col*/}
+                        <div className="text-center">
+                            <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png"
+                                 className="avatar img-circle img-thumbnail" alt="avatar"/>
+                            <h6>Upload a different photo...</h6>
+                            <input type="file" className="text-center center-block file-upload"/>
                         </div>
+                        <hr/>
+                        <br/>
+
+                        <ul className="list-group">
+                            <li className="list-group-item"><span
+                                className="pull-left"><strong>Profile</strong></span>
+                            </li>
+                            <li className="list-group-item text-muted"><span
+                                className="pull-left"><strong>Activity</strong></span>
+                            </li>
+                        </ul>
+
                     </div>
+                    <div className="col-sm-6 col-md-6">
+                        <div className="tab-content">
+                            <div className="tab-pane active" id="home">
+                                <hr/>
+                                <form className="form" onSubmit={this.onSubmit} method="put" id="profile-update-form">
+                                    <div className="form-group">
 
-                    <div className="row">
-                        <div className="col-sm-3">
-                            {/*left col*/}
-                            <div className="text-center">
-                                <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png"
-                                     className="avatar img-circle img-thumbnail" alt="avatar"/>
-                                <h6>Upload a different photo...</h6>
-                                <input type="file" className="text-center center-block file-upload"/>
-                            </div>
-                            <hr/>
-                            <br/>
-
-                            {/*<ul className="list-group">*/}
-                            {/*    <li className="list-group-item text-muted">Activity <i*/}
-                            {/*        className="fa fa-dashboard fa-1x"></i></li>*/}
-                            {/*    <li className="list-group-item text-right"><span*/}
-                            {/*        className="pull-left"><strong>Shares</strong></span> 125*/}
-                            {/*    </li>*/}
-                            {/*    <li className="list-group-item text-right"><span*/}
-                            {/*        className="pull-left"><strong>Likes</strong></span> 13*/}
-                            {/*    </li>*/}
-                            {/*    <li className="list-group-item text-right"><span*/}
-                            {/*        className="pull-left"><strong>Posts</strong></span> 37*/}
-                            {/*    </li>*/}
-                            {/*    <li className="list-group-item text-right"><span*/}
-                            {/*        className="pull-left"><strong>Followers</strong></span> 78*/}
-                            {/*    </li>*/}
-                            {/*</ul>*/}
-
-                        </div>
-                        {/*col-3*/}
-                        <div className="col-sm-9">
-                            <div className="tab-content">
-                                <div className="tab-pane active" id="home">
-                                    <hr/>
-                                    <form className="form" action="##" method="post" id="registrationForm">
-                                        <div className="form-group">
-
-                                            <div className="col-xs-6">
-                                                <label for="first_name"><h4>Username</h4></label>
-                                                <input type="text" className="form-control" name="first_name"
-                                                       id="first_name"
-                                                       placeholder="first name" title="enter your first name if any."/>
-                                            </div>
+                                        <div className="col-xs-6">
+                                            <label><h4>Username</h4></label>
+                                            <input type="text"
+                                                   className="form-control"
+                                                   name="username"
+                                                   id="username"
+                                                   onChange={this.onChange}
+                                                   value={this.state.username}
+                                                   placeholder={username}/>
                                         </div>
+                                    </div>
 
-                                        <div className="form-group">
+                                    <div className="form-group">
 
-                                            <div className="col-xs-6">
-                                                <label for="email"><h4>Email</h4></label>
-                                                <input type="email" className="form-control" name="email" id="email"
-                                                       placeholder="you@email.com" title="enter your email."/>
-                                            </div>
+                                        <div className="col-xs-6">
+                                            <label><h4>Email</h4></label>
+                                            <input type="email"
+                                                   className="form-control"
+                                                   name="email"
+                                                   id="email"
+                                                   onChange={this.onChange}
+                                                   value={this.state.email}
+                                                   placeholder={email}/>
                                         </div>
+                                    </div>
 
-                                        <div className="form-group">
+                                    <div className="form-group">
 
-                                            <div className="col-xs-6">
-                                                <label for="password"><h4>Password</h4></label>
-                                                <input type="password" className="form-control" name="password"
-                                                       id="password"
-                                                       placeholder="password" title="enter your password."/>
-                                            </div>
+                                        <div className="col-xs-6">
+                                            <label><h4>Password</h4></label>
+                                            <input type="password"
+                                                   className="form-control"
+                                                   name="password"
+                                                   id="password"
+                                                   onChange={this.onChange}
+                                                   value={this.state.password}
+                                                   placeholder="password"/>
                                         </div>
-                                        <div className="form-group">
+                                    </div>
+                                    <div className="form-group">
 
-                                            <div className="col-xs-6">
-                                                <label for="password2"><h4>Verify</h4></label>
-                                                <input type="password" className="form-control" name="password2"
-                                                       id="password2"
-                                                       placeholder="password2" title="enter your password2."/>
-                                            </div>
+                                        <div className="col-xs-6">
+                                            <label><h4>Verify</h4></label>
+                                            <input type="password"
+                                                   className="form-control"
+                                                   name="password2"
+                                                   id="password2"
+                                                   onChange={this.onChange}
+                                                   value={this.state.password2}
+                                                   placeholder="password2"/>
                                         </div>
-                                        <div className="form-group">
-                                            <div className="col-xs-12">
-                                                <br/>
-                                                <button className="btn btn-lg btn-success" type="submit">
-                                                    <i className="glyphicon glyphicon-ok-sign"/>
-                                                    Save
-                                                </button>
-                                                <button className="btn btn-lg" type="reset">
-                                                    <i className="glyphicon glyphicon-repeat"/>
-                                                    Reset
-                                                </button>
-                                            </div>
+                                    </div>
+                                    <div className="form-group">
+                                        <div className="col-xs-12">
+                                            <br/>
+                                            <button className="btn btn-lg btn-success"
+                                                    type="submit"
+                                                    name="submit-form"
+                                                    id="submit-form">
+                                                <i className="glyphicon glyphicon-ok-sign"/>
+                                                Save
+                                            </button>
                                         </div>
-                                    </form>
-
-                                    <hr/>
-
-                                </div>
+                                    </div>
+                                </form>
+                                <hr/>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
         );
     }
 }
 
-// function mapStateToProps(state) {
-//     return {};
-// }
-//
-// export default connect(
-//     mapStateToProps,
-// )(MyComponent);
+const mapStateToProps = (state) => ({
+    user: state.auth.user
+});
+
+export default connect(mapStateToProps, {updateUser})(Profile);

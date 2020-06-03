@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {returnErrors} from "./messages";
+import {createMessage, returnErrors} from "./messages";
 import {
     USER_LOADING,
     USER_LOADED,
@@ -8,7 +8,7 @@ import {
     LOGIN_FAIL,
     LOGOUT_SUCCESS,
     REGISTER_SUCCESS,
-    REGISTER_FAIL
+    REGISTER_FAIL, USER_UPDATE_SUCCESS
 } from "./types";
 
 // Check token and load a user
@@ -110,6 +110,29 @@ export const register = ({username, password, email}) => dispatch => {
     })
 };
 
+// UPDATE USER
+export const updateUser = (user) => (dispatch, getState) => {
+    let body;
+    if(user.length === 2) {
+        const {username, email} = user;
+        body = JSON.stringify({username, email});
+    } else {
+        const {username, email, password} = user
+        body = JSON.stringify({username, email, password});
+    }
+
+    axios.put('api/auth/user', body, tokenConfig(getState))
+        .then(res => {
+            dispatch(createMessage({addComment: 'Profile information updated'}));
+            dispatch({
+                type: USER_UPDATE_SUCCESS,
+                payload: res.data
+            });
+        }).catch(err => {
+        dispatch(createMessage({addComment: 'Updating failed'}));
+        dispatch(returnErrors(err.response.data, err.response.status));
+    })
+};
 
 export const tokenConfig = (getState) => {
     // get token from state

@@ -1,6 +1,7 @@
+from knox.models import AuthToken
 from rest_framework import generics, permissions
 from rest_framework.response import Response
-from knox.models import AuthToken
+
 from .serializers import UserSerializer, RegisterSerializer, LoginSerializer
 
 
@@ -31,17 +32,19 @@ class LoginAPI(generics.GenericAPIView):
         })
 
 
-class UserAPI(generics.RetrieveAPIView):
+class UserAPI(generics.RetrieveUpdateAPIView):
     """
     Retrieves the user based and token, so it can be sent in request.
     Headers: Authorisation: Token ......
     """
     #  authentication_classes = (TokenAuthentication,)
     permission_classes = [
-        permissions.IsAuthenticated
+        permissions.IsAuthenticated,
     ]
 
     serializer_class = UserSerializer
 
     def get_object(self):
         return self.request.user
+
+    # def partial_update(self, request, *args, **kwargs):
