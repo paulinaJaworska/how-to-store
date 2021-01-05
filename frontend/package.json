@@ -28,7 +28,7 @@
     "webpack-cli": "^3.3.11"
   },
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "css-loader": "^3.4.2",
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.1.2",
